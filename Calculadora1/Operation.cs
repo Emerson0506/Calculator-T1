@@ -29,6 +29,9 @@ namespace Calculadora1
             Console.WriteLine($"{facConsole} = {Result}");
             return Result;
 
+
+
+
         }
         public double Share(double Number1, double Number2, string facConsole)
         {
