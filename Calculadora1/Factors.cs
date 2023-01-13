@@ -1,10 +1,4 @@
-﻿using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Calculadora1;
+﻿using System.Runtime.InteropServices;
 
 namespace Calculadora1
 {
@@ -14,7 +8,7 @@ namespace Calculadora1
         public double Number1 { get; set; }
         public double Number2 { get; set; }
 
-
+        public double Result { get; set; }
         public char ChooseOperation { get; set; }
 
         public string InConsole { get; set; }
@@ -30,6 +24,8 @@ namespace Calculadora1
                 Console.Clear();
             }
         }
+
+
         public int InvalidMessage(string n1)
         {
             while (true)
@@ -49,49 +45,84 @@ namespace Calculadora1
             }
             return Convert.ToInt32(n1);
         }
-        public void ChoosingOperation(char chooseOperation, double number1, double number2)
+
+        public void MostrarCalculo(double result, string Inconsole)
         {
-            switch (chooseOperation)
-            {
-                case '+':
-
-                    //InsertNumber2();
-                    var resultadoAdição = operations.Adding(number1, number2, operations.Number, InConsole);
-                    operations.MostrarCalculo(number1, number2, resultadoAdição, '+', InConsole);
-
-                    return;
-
-                case '/':
-
-                    //InsertNumber2();
-                    var resultadoDivisao = operations.Share(number1, number2, InConsole);
-                    operations.MostrarCalculo(number1, number2, resultadoDivisao, '/', InConsole);
-
-                    return;
-
-                case '*':
-
-                    //InsertNumber2();
-                    var resultadoMult = operations.Multiply(number1, number2, InConsole);
-                    operations.MostrarCalculo(number1, number2, resultadoMult, '*', InConsole);
-
-                    return;
-
-                case '-':
-
-                    //InsertNumber2();
-                    var resultadoSub = operations.Subtract(number1, number2, InConsole);
-                    operations.MostrarCalculo(number1, number2, resultadoSub, '-', InConsole);
-
-                    return;
-            }
-
+            Result = result;
+            Inconsole += ($" = {Result}");
+            Operation.Menu2(Inconsole);
+        }
+        public void MostrarCalculo2(double result, string Inconsole)
+        {
+            Result = result;
+            Inconsole += ($" = {Result}");
         }
 
 
+        public void ChoosingOperation(char chooseOperation, double number1, double number2, string InConsole)
+        {
+
+            if (chooseOperation == '+')
+            {
+               double addResult = operations.Adding(number1, number2);
+               MostrarCalculo(addResult, InConsole);       
+            }
+
+            if (chooseOperation == '/')
+            {
+
+               double divResult = operations.Share(number1, number2);
+               MostrarCalculo(divResult, InConsole);
+
+            }
+
+            if (chooseOperation == '*')
+            { 
+               double multResult = operations.Multiply(number1, number2);
+               MostrarCalculo(multResult, InConsole);
+            }
+
+            if (chooseOperation == '-')
+            {
+               double subResult = operations.Subtract(number1, number2);
+               MostrarCalculo(subResult, InConsole);
+
+            }
+            
+        }
+        public void ChoosingOperation2(char chooseOperation, double number1, double number2, string InConsole)
+        {
+
+            if (chooseOperation == '+')
+            {
+                double addResult = operations.Adding(number1, number2);
+                MostrarCalculo2(addResult, InConsole);
+            }
+
+            if (chooseOperation == '/')
+            {
+
+                double divResult = operations.Share(number1, number2);
+                MostrarCalculo2(divResult, InConsole);
+
+            }
+
+            if (chooseOperation == '*')
+            {
+                double multResult = operations.Multiply(number1, number2);
+                MostrarCalculo2(multResult, InConsole);
+            }
+
+            if (chooseOperation == '-')
+            {
+                double subResult = operations.Subtract(number1, number2);
+                MostrarCalculo2(subResult, InConsole);
+
+            }
+
+        }
     }
-
-
 }
+
 
 

@@ -1,6 +1,6 @@
 ﻿
 using Calculadora1;
-using System.Text.RegularExpressions;
+using System;
 
 Factors factors = new Factors();
 Operation operations = new Operation();
@@ -22,21 +22,54 @@ while (iniciality != "1" && iniciality != "0" || String.IsNullOrEmpty(iniciality
     iniciality = Console.ReadLine();
     Console.Clear();
 }
-while (iniciality == "1")
+//while (iniciality == "1")
+//{
+Operation.Menu2(factors.InConsole);
+factors.Number1 = factors.InvalidMessage(Console.ReadLine());
+factors.InConsole = ($"{factors.Number1}");
+
+Operation.Menu2(factors.InConsole);
+
+var operacao1 = operations.DescobrirOperacao();
+factors.InConsole += ($" {operacao1}");
+Operation.Menu2(factors.InConsole);
+
+factors.Number2 = factors.InvalidMessage(Console.ReadLine());
+factors.InConsole += ($" {factors.Number2}");
+Operation.Menu2(factors.InConsole);
+factors.ChoosingOperation2(operacao1, factors.Number1, factors.Number2, factors.InConsole);
+char operacao = operations.DescobrirOperacao2();
+
+while (operacao != '=')
 {
-    Console.Clear();
-    Operation.Menu2(factors.InConsole);
-    factors.Number1 = factors.InvalidMessage(Console.ReadLine());
-    factors.InConsole = ($"{factors.Number1}");
+    if (operacao == '-' || operacao == '/' || operacao == '*' || operacao == '+')
+    {
+        factors.Number1 = factors.Result;
+        factors.InConsole = ($"{factors.Number1} {operacao}");
+        Operation.Menu2(factors.InConsole);
+        factors.Number2 = factors.InvalidMessage(Console.ReadLine());
+        factors.InConsole += ($" {factors.Number2}");
+        Operation.Menu2(factors.InConsole);
+        factors.ChoosingOperation2(operacao, factors.Number1, factors.Number2, factors.InConsole);
+        operacao = operations.DescobrirOperacao2();
 
-   var operacao = operations.DescobrirOperacao(factors.InConsole);
+        if (operacao == '=')
+        {
+            Operation.ResultMenu(factors.Result);
+            operacao = '=';
+            Thread.Sleep(5000);
+            Console.ReadKey();
+        }
 
-    Operation.Menu2(factors.InConsole);
-
-    factors.Number2 = factors.InvalidMessage(Console.ReadLine());
-
-    factors.InConsole = "";
-    factors.InConsole = ($" {factors.Number1} {operacao} {factors.Number2}");
-
-    factors.ChoosingOperation(operacao, factors.Number1, factors.Number2);
+    }
 }
+        
+        //factors.ChoosingOperation(operacao1, factors.Number1, factors.Number2, factors.InConsole);
+        //operacao = '=';
+        //string teste = Console.ReadLine();
+        //Console.ReadKey();
+
+
+
+
+
