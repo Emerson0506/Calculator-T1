@@ -22,8 +22,7 @@ while (iniciality != "1" && iniciality != "0" || String.IsNullOrEmpty(iniciality
     iniciality = Console.ReadLine();
     Console.Clear();
 }
-//while (iniciality == "1")
-//{
+
 Operation.Menu2(factors.InConsole);
 factors.Number1 = factors.InvalidMessage(Console.ReadLine());
 factors.InConsole = ($"{factors.Number1}");
