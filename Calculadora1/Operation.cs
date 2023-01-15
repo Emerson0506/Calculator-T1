@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Calculadora1
 {
@@ -8,7 +9,7 @@ namespace Calculadora1
 
         public double Number { get; set; }
         public double Result { get; set; }
-        public double FinalResult { get; set; }
+        
         public double Adding(double Number1, double Number2)
         {
             double resultOp = Number1 + Number2;
@@ -40,38 +41,37 @@ namespace Calculadora1
         public static void Menu2(string facConsole)
         {
             Console.Clear();
-            Console.WriteLine($"\n{facConsole}\n\n1 2 3 +\n4 5 6 -\n7 8 9 /\n  0 * =");
+            Console.WriteLine($"\n\n{facConsole}\n\n  % c <\n1 2 3 +\n4 5 6 -\n7 8 9 /\n  0 * =");
         }
 
         public static void ResultMenu(double result)
         {
             Console.Clear();
-            Console.WriteLine($"\n{$"Resultado : {result}"}\n\n1 2 3 +\n4 5 6 -\n7 8 9 /\n  0 * =");
+            Console.WriteLine($"\n{$"Resultado : {result}"}\n\n  % c <\n1 2 3 +\n4 5 6 -\n7 8 9 /\n  0 * =");
         }
-        public char DescobrirOperacao()
+        public char SearchOperation()
         {
-            Console.WriteLine("Escolha a operação:  / * - +");
             var operacao = char.Parse(Console.ReadLine());
             
-
             while (operacao != '/' && operacao != '*'
-                && operacao != '-' && operacao != '+')
+                && operacao != '-' && operacao != '+' && operacao != 'c')
             {
-                Console.WriteLine("Siga o padrão e escolha uma operação.\n");
+                Console.WriteLine("Não há como obter um resultado sem ao menos 2 fatores!\n");
                 operacao = char.Parse(Console.ReadLine());
             }
             return operacao;
         }
-        public char DescobrirOperacao2()
+        public char SearchOperation2()
         {
             var operacao = char.Parse(Console.ReadLine());
 
             while (operacao != '/' && operacao != '*'
-                && operacao != '-' && operacao != '+' && operacao != '=' )
+                && operacao != '-' && operacao != '+' && operacao != '=' && operacao != 'c')
             {
                 Console.WriteLine("Digite uma operação ou ' = ' para receber seu resultado.");
                 operacao = char.Parse(Console.ReadLine());
             }
+            
             return operacao;
         }
     }
