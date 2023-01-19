@@ -8,7 +8,7 @@ Factors factors = new Factors();
 Operation operations = new Operation();
 Validates validate = new Validates();
 
-char operacao;
+string operacao;
 var infinity = "";
 
 Console.WriteLine("Bem vindo a sua calculadora 1/3, digite '1' para iniciar ou '0' para sair.");
@@ -32,9 +32,9 @@ while (iniciality == "1")
 
         Operation.Menu2(factors.InConsole);
 
-        var operacao1 = operations.SearchOperation();
+        string operacao1 = operations.SearchOperation(factors.InConsole) ;
         factors.InConsole += ($" {operacao1}");
-        if (operacao1 == 'c')
+        if (operacao1 == "c")
         {
             factors.InConsole = factors.ConsoleIsNull();
             break;
@@ -45,23 +45,22 @@ while (iniciality == "1")
         factors.InConsole += ($" {factors.Number2}");
         if (factors.Number2 == 30062000)
         {
-            
             factors.InConsole = factors.ConsoleIsNull();
             break;
         }
         Operation.Menu2(factors.InConsole);
-        factors.ChoosingOperation2(operacao1, factors.Number1, factors.Number2, factors.InConsole);
-        operacao = operations.SearchOperation2();
-        if (operacao == 'c')
+        factors.ChoosingOperation(operacao1, factors.Number1, factors.Number2, factors.InConsole);
+        operacao = operations.SearchOperation2(factors.InConsole);
+        if (operacao == "c")
         {
             factors.InConsole = factors.ConsoleIsNull();
             break;
         }
-        if (operacao != '=')
+        if (operacao != "=")
         {
-            while (operacao != '=')
+            while (operacao != "=")
             {
-                if (operacao == '-' || operacao == '/' || operacao == '*' || operacao == '+')
+                if (operacao == "-" || operacao == "/" || operacao == "*" || operacao == "+")
                 {
                     factors.Number1 = factors.Result;
                     factors.InConsole = ($"{factors.Number1} {operacao}");
@@ -75,33 +74,60 @@ while (iniciality == "1")
 
                     factors.InConsole += ($" {factors.Number2}");
                     Operation.Menu2(factors.InConsole);
-                    factors.ChoosingOperation2(operacao, factors.Number1, factors.Number2, factors.InConsole);
-
-                    operacao = operations.SearchOperation2();
-                    if (operacao == 'c')
+                    factors.ChoosingOperation(operacao, factors.Number1, factors.Number2, factors.InConsole);
+                    operacao1 = operacao;
+                    operacao = operations.SearchOperation2(factors.InConsole);
+                    if (operacao == "c")
                     {
                         factors.InConsole = factors.ConsoleIsNull();
                         break;
                     }
 
-                    if (operacao == '=')
+                    if (operacao == "=")
                     {
                         Operation.ResultMenu(factors.Result);
-                        operacao = '=';
-                        Console.WriteLine("Pressione ENTER para realizar outro calculo ");
                         Console.ReadKey();
+                    }
+                    
+                }
+                if (operacao == "%" || operacao1 == "%")
+                {
+                    if (operacao1 == "-" || operacao1 == "+")
+                    {
+                        factors.Number2 = factors.Number1 * (factors.Number2 / 100);
+                        factors.InConsole = $"{factors.Number1} {operacao1} {factors.Number2}";
+                        Operation.Menu2(factors.InConsole);
+                        operacao = operacao1;
+                        factors.ChoosingOperation(operacao, factors.Number1, factors.Number2, factors.InConsole);
+                        operacao = operations.SearchOperation2(factors.InConsole);
+                        if (operacao == "c")
+                        {
+                            factors.InConsole = factors.ConsoleIsNull();
+                            break;
+                        }
+                    }
+                    if(operacao1 == "*" || operacao1 == "/")
+                    {
+                        factors.Number2 = factors.Number2 / 100;
+                        factors.InConsole = $"{factors.Number1} {operacao1} {factors.Number2}";
+                        Operation.Menu2(factors.InConsole);
+                        operacao = operacao1;
+                        factors.ChoosingOperation(operacao, factors.Number1, factors.Number2, factors.InConsole);
+                        operacao = operations.SearchOperation2(factors.InConsole);
+                        if (operacao == "c")
+                        {
+                            factors.InConsole = factors.ConsoleIsNull();
+                            break;
+                        }
                     }
                 }
             }
-            break;
         }
-
-        else
+        if(operacao == "=")
         {
             Operation.ResultMenu(factors.Result);
-            Thread.Sleep(5000);
-            Console.WriteLine("Pressione ENTER para realizar outro calculo ");
             Console.ReadKey();
         }
+            
     }
 }

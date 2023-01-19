@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Buffers;
-using System.Xml.Schema;
-using System.Security.Cryptography.X509Certificates;
+
+
 
 namespace Calculadora1
 {
@@ -31,7 +31,7 @@ namespace Calculadora1
             return iniciality;
         }
 
-        public int NumbersInvalidMessage(string n1)
+        public double NumbersInvalidMessage(string n1)
         {
             while (validNumber == false)
             {
@@ -40,7 +40,7 @@ namespace Calculadora1
                     if (String.IsNullOrEmpty(n1))
                     {
                         Operation.Menu2(factors.InConsole);
-                        Console.WriteLine("Por favor, digite algo para que possa ser realizado o cálculo.");
+                        Console.WriteLine("\nPor favor, digite algo para que possa ser realizado o cálculo.");
                         n1 = Console.ReadLine();
                     }
                     else
@@ -56,7 +56,7 @@ namespace Calculadora1
                 {
                     validNumber = false;
                     Operation.Menu2(factors.InConsole);
-                    Console.WriteLine($" '{n1}' não é um número, tente novamente.");
+                    Console.WriteLine($"\n'{n1}' não é um número, tente novamente.");
                     n1 = Console.ReadLine();
                     match = Regex.Match(n1, pattern);
 
@@ -70,7 +70,8 @@ namespace Calculadora1
             {
                 n1 = "30062000";
             }
-            return Convert.ToInt32(n1);
+                return Double.Parse(n1);
+            
 
         }
 
